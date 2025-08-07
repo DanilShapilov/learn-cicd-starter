@@ -50,13 +50,15 @@ func TestGetAPIKey(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			got, err := GetAPIKey(tc.input)
 			if err == nil && tc.shouldFail {
-				t.Fatalf("got: %v, shouldFail: %v", got, tc.shouldFail)
+				t.Errorf("got: %v, shouldFail: %v", got, tc.shouldFail)
+				return
 			}
 			if err != nil && !tc.shouldFail {
-				t.Fatalf("error: %v, shouldFail: %v", err, tc.shouldFail)
+				t.Errorf("error: %v, shouldFail: %v", err, tc.shouldFail)
+				return
 			}
 			if got != tc.want {
-				t.Fatalf("expected: %v, got: %v, shouldFail: %v", tc.want, got, tc.shouldFail)
+				t.Errorf("expected: %v, got: %v, shouldFail: %v", tc.want, got, tc.shouldFail)
 			}
 		})
 	}
